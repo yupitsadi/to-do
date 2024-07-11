@@ -1,6 +1,6 @@
 import React from 'react'
 import bin from '../assets/delete.png'
-import Tagform from './Tagform'
+import Tagform from './tagform'
 
 const ToWork = () => {
   return (
