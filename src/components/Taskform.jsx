@@ -2,11 +2,15 @@ import React, { useState } from "react";
 import Tagform from "./tagform";
 
 const TaskForm = ({ setTask }) => {
-  const [taskData, setTaskData] = useState({
+  const initialTaskData = {
     task: "",
-    status: "To-do", // Adjusted to match the correct status string
+    status: "To-do",
     tags: [],
-  });
+  };
+
+  const [taskData, setTaskData] = useState(initialTaskData);
+  const [error, setError] = useState("");
+
 
   const handleTheChange = (e) => {
     const { name, value } = e.target;
@@ -28,10 +32,13 @@ const TaskForm = ({ setTask }) => {
 
   const handleTheSubmit = (e) => {
     e.preventDefault();
-    console.log(taskData);
-    setTask((prev) => {
-      return [...prev, taskData];
-    });
+    if (!taskData.task.trim()) {
+      setError("Please fill out the task.");
+      return;
+    }
+    setTask((prev) => [...prev, taskData]);
+    setTaskData(initialTaskData); // Reset the input field
+    setError(""); // Clear the error message
   };
 
   return (
@@ -43,9 +50,11 @@ const TaskForm = ({ setTask }) => {
             type="text"
             className="pl-2 border-2 outline-2 border-solid w-80"
             placeholder="Enter Your task"
+            value={taskData.task} // Set the value to state
             onChange={handleTheChange}
           />
         </form>
+        {error && <div className="text-red-500">{error}</div>}
         <div className="flex flex-row p-0">
           <div className="tagForms px-2">
             <Tagform tagName="Html" tagHandle={tagHandle} tagColour={tagColour("Html")} />
@@ -53,7 +62,7 @@ const TaskForm = ({ setTask }) => {
             <Tagform tagName="JavaScript" tagHandle={tagHandle} tagColour={tagColour("JavaScript")} />
             <Tagform tagName="React" tagHandle={tagHandle} tagColour={tagColour("React")} />
           </div>
-          <select className="TaskOptions mx-4 p-2 border-2" name="status" onChange={handleTheChange}>
+          <select className="TaskOptions mx-4 p-2 border-2" name="status" onChange={handleTheChange} value={taskData.status}>
             <option value="To-do">To-do</option>
             <option value="Doing">Doing</option>
             <option value="Done">Done</option>
