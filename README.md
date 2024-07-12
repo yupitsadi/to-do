@@ -14,16 +14,15 @@ This project is a basic To-Do application developed using React. It allows users
 ## Installation
 
 1. Clone the repository:
+  git clone https://github.com/yupitsadi/to-do.git
 
-git clone https://github.com/yupitsadi/to-do.git
+2. Navigate into the project directory: cd todo-app
 
-2. Navigate into the project directory:
+3. Install dependencies: npm install
 
-3. Install dependencies:
+4. Start the development server: npm run dev
 
-4. Start the development server:
-
-5. Open your browser and visit `http://localhost:3000` to view the application.
+5. Open your browser and visit `http://localhost:5173` to view the application.
 
 ## Usage
 
